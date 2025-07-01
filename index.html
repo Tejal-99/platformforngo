@@ -117,7 +117,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section id="donate-form" class="py-16 px-6 md:px-10 lg:px-20 max-w-xl mx-auto">
         <div class="bg-white p-8 rounded-xl shadow-md border border-blue-200">
             <h2 class="text-3xl font-bold text-center text-blue-700 mb-8">Make Your Secure Donation</h2>
-            <form class="space-y-6">
+            <form class="space-y-6" id="donationForm">
                 <div>
                     <label for="amount" class="block text-sm font-medium text-gray-700 mb-2">Donation Amount</label>
                     <div class="mt-1 relative rounded-md shadow-sm">
@@ -161,6 +161,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     Complete Donation
                 </button>
             </form>
+
+            <!-- Thank You Message Section (Initially Hidden) -->
+            <div id="thankYouMessage" class="hidden text-center py-8">
+                <h3 class="text-2xl font-bold text-blue-700 mb-4">Thank You for Your Generous Donation!</h3>
+                <p class="text-lg text-gray-700 mb-6">Your support makes a significant difference in our mission. We truly appreciate your kindness.</p>
+                <button id="donateAgainButton" class="inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
+                    Donate Again
+                </button>
+            </div>
         </div>
     </section>
 
@@ -189,6 +198,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Get references to the form and thank you message elements
+        const donationForm = document.getElementById('donationForm');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+        const donateAgainButton = document.getElementById('donateAgainButton');
+
+        // Add an event listener for the form submission
+        donationForm.addEventListener('submit', function(event) {
+            // Prevent the default form submission behavior (page reload)
+            event.preventDefault();
+
+            // Simulate a successful donation (in a real app, this would involve sending data to a server)
+            console.log('Donation submitted!');
+
+            // Hide the donation form
+            donationForm.classList.add('hidden');
+
+            // Show the thank you message
+            thankYouMessage.classList.remove('hidden');
+
+            // Scroll to the thank you message for better UX
+            thankYouMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // Add an event listener to the "Donate Again" button
+        donateAgainButton.addEventListener('click', function() {
+            // Hide the thank you message
+            thankYouMessage.classList.add('hidden');
+
+            // Show the donation form again
+            donationForm.classList.remove('hidden');
+
+            // Reset the form fields (optional, but good for multiple donations)
+            donationForm.reset();
+
+            // Scroll back to the form
+            donationForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
 
 </body>
 </html>
